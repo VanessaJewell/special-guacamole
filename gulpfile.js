@@ -1,10 +1,11 @@
 'use strict'
 const gulp = require('gulp');
+const autoprefixer = require('gulp-autoprefixer');
 const babel = require('gulp-babel');
 const browserSync = require('browser-sync');
-const autoprefixer = require('gulp-autoprefixer');
 const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
+const imagemin = require('gulp-imagemin');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
@@ -47,7 +48,13 @@ gulp.task('bs-reload', function() {
   browserSync.reload();
 });
 
-gulp.task('default', ['sass', 'scripts', 'browser-sync'], function () {
+gulp.task('image', () =>
+    gulp.src('./app/images/*')
+        .pipe(imagemin())
+        .pipe(gulp.dest('dist/images'))
+);
+
+gulp.task('default', ['image', 'sass', 'scripts', 'browser-sync'], function () {
   gulp.watch('./app/sass/**/*.scss', ['sass']);
   gulp.watch('./app/js/**/*.js', ['scripts']);
   gulp.watch("./*.html", ['bs-reload']);
