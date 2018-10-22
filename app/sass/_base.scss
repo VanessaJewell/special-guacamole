@@ -1,0 +1,49 @@
+* {
+  box-sizing:border-box;
+  max-width:100%;
+}
+
+body {
+  color: $text-color;
+  font-size:2em;
+}
+
+div {
+  color: $text-color;
+}
+
+h1 {
+  color: $header-color;
+  @include leftBorder('red', '5px');
+}
+
+h2 {
+  @include leftBorder('#0000ff', '3px');
+}
+
+.header {
+  font-size:4em;
+  text-decoration:underline;
+  line-height:4em;
+}
+
+p {
+  color:$text-color;
+  @extend h1;
+}
+
+ul {
+  padding-left:0;
+  li {
+    list-style-type:none;
+    a {
+      color:green;
+    }
+  }
+}
+
+div {
+  &.card {
+    border:solid 1px #fefefe;
+  }
+}

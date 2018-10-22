@@ -1,0 +1,4 @@
+@mixin leftBorder($color, $width) {
+  border-left-width: $width;
+  border-left-color: $color;
+}
