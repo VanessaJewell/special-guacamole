@@ -6,6 +6,7 @@ const browserSync = require('browser-sync');
 const concat = require('gulp-concat');
 const cssnano = require('gulp-cssnano');
 const imagemin = require('gulp-imagemin');
+const imageminMozjpeg = require('imagemin-mozjpeg');
 const sass = require('gulp-sass');
 const sourcemaps = require('gulp-sourcemaps');
 const uglify = require('gulp-uglify');
@@ -50,8 +51,12 @@ gulp.task('bs-reload', function() {
 
 gulp.task('image', () =>
     gulp.src('./app/images/*')
-        .pipe(imagemin())
-        .pipe(gulp.dest('dist/images'))
+        .pipe(imagemin([
+          imageminMozjpeg({
+                quality: 80
+            })
+        ]))
+        .pipe(gulp.dest('./dist/images'))
 );
 
 gulp.task('default', ['image', 'sass', 'scripts', 'browser-sync'], function () {
